@@ -1,0 +1,79 @@
+class Most:
+    def __init__(self, dlugosc, masa, masa_samochodu, odleglosc_pretow, predkosc_samochodu, max_sila_rozciagajaca):
+        self.dlugosc = dlugosc
+        self.masa = masa
+        self.masa_samochodu = masa_samochodu
+        self.odleglosc_pretow = odleglosc_pretow
+        self.predkosc_samochodu = predkosc_samochodu
+        self.max_sila_rozciagajaca = max_sila_rozciagajaca
+        self.g = 9.81  # Przyspieszenie ziemskie w m/s^2
+
+    def pozycja_samochodu(self, t):
+        return self.predkosc_samochodu * t
+
+    def sily_w_pretach(self, t):
+        x_s = self.pozycja_samochodu(t)
+
+        if x_s < 0 or x_s > self.dlugosc:
+            raise ValueError("Samochód znajduje się poza mostem")
+
+        a = self.odleglosc_pretow
+        L = self.dlugosc
+        M = self.masa
+        m_s = self.masa_samochodu
+        g = self.g
+
+        # Równania równowagi momentów względem lewego pręta
+        moment_samochodu = m_s * g * (x_s - a)
+        moment_mostu = M * g * (L / 2 - a)
+        suma_momentow = moment_samochodu + moment_mostu
+
+        # Suma sił w pionie musi równać się ciężarowi mostu i samochodu
+        suma_sil = (M + m_s) * g
+
+        # Rozwiązujemy równania równowagi
+        F_P = suma_momentow / (L - 2 * a)
+        F_L = suma_sil - F_P
+
+        # Sprawdzamy, czy siły nie przekraczają maksymalnej siły rozciągającej
+        if F_L > self.max_sila_rozciagajaca or F_P > self.max_sila_rozciagajaca:
+            raise ValueError("Siła przekracza maksymalną wytrzymałość prętów")
+
+        return F_L, F_P
+
+    def F1(self, t):
+        F_L, _ = self.sily_w_pretach(t)
+        return F_L
+
+    def F2(self, t):
+        _, F_P = self.sily_w_pretach(t)
+        return F_P
+
+def main():
+    # Pobieranie danych od użytkownika
+    dlugosc = float(input("Podaj długość mostu (m): "))
+    masa = float(input("Podaj masę mostu (kg): "))
+    masa_samochodu = float(input("Podaj masę samochodu (kg): "))
+    odleglosc_pretow = float(input("Podaj odległość prętów od brzegów mostu (m): "))
+    predkosc_samochodu = float(input("Podaj prędkość samochodu (m/s): "))
+    max_sila_rozciagajaca = 35000  # Maksymalna siła rozciągająca w N (35 kN)
+    
+    # Tworzenie obiektu Most
+    most = Most(dlugosc, masa, masa_samochodu, odleglosc_pretow, predkosc_samochodu, max_sila_rozciagajaca)
+
+    # Pobieranie i przetwarzanie danych dotyczących czasu
+    while True:
+        czas_input = input("Podaj czas (s) lub wpisz 'stop' aby zakończyć: ")
+        if czas_input.lower() == 'stop':
+            break
+        
+        try:
+            t = float(czas_input)
+            F_L = most.F1(t)
+            F_P = most.F2(t)
+            print(f"Czas: {t} s, Siła w lewym pręcie (F1): {F_L:.2f} N, Siła w prawym pręcie (F2): {F_P:.2f} N")
+        except ValueError as e:
+            print(f"Błąd: {e}")
+
+if __name__ == "__main__":
+    main()
