@@ -77,3 +77,25 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+
+def maksymalna_dlugość_mostu(liczba_kart, stosunek_dlugosci):
+    dlugosc_karty = 1  # Przyjmujemy jednostkową długość dla pojedynczej karty
+    maks_dl = 0
+    
+    for n in range(1, liczba_kart + 1):
+        maks_dl += dlugosc_karty / n
+    
+    # Przeliczenie maksymalnej długości na rzeczywistą długość karty
+    maks_dl *= stosunek_dlugosci
+    return maks_dl
+
+# Wprowadź dane
+liczba_kart = int(input("Podaj liczbę kart: "))
+stosunek_dlugosci = float(input("Podaj stosunek długości mostu do długości jednej karty (1 do x): "))
+
+# Obliczanie maksymalnej długości mostu
+dlugosc_mostu = maksymalna_dlugość_mostu(liczba_kart, stosunek_dlugosci)
+
+print(f"Maksymalna długość mostu z {liczba_kart} kart ułożonych w stos to: {dlugosc_mostu:.2f} jednostek długości.")
