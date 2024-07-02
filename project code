@@ -80,29 +80,6 @@ if __name__ == "__main__":
     main()
 
 
-#tworzenie mostu z identycznych kart - jak długi może on być?
-def maksymalna_dlugość_mostu(liczba_kart, stosunek_dlugosci):
-    dlugosc_karty = 1  # Przyjmujemy jednostkową długość dla pojedynczej karty
-    maks_dl = 0
-    
-    for n in range(1, liczba_kart + 1):
-        maks_dl += dlugosc_karty / n
-    
-    # Przeliczenie maksymalnej długości na rzeczywistą długość karty
-    maks_dl *= stosunek_dlugosci
-    return maks_dl
-
-# Wprowadź dane
-liczba_kart = int(input("Podaj liczbę kart: "))
-stosunek_dlugosci = float(input("Podaj stosunek długości mostu do długości jednej karty (1 do x): "))
-
-# Obliczanie maksymalnej długości mostu
-dlugosc_mostu = maksymalna_dlugość_mostu(liczba_kart, stosunek_dlugosci)
-
-print(f"Maksymalna długość mostu z {liczba_kart} kart ułożonych w stos to: {dlugosc_mostu:.2f} jednostek długości.")
-
-
-
 #most łukowy
 import math  # noqa: E402
 
@@ -135,4 +112,68 @@ try:
 except ValueError as e:
     print(f"Błąd: {e}")
 
+#jakie rzeczy wziąć pod uwagę przy budowie mostu?
+import random  # noqa: E402
 
+def generuj_aspekty():
+    aspekty_naturalne = [
+        "Rzeźba terenu", "Rodzaj gleby", "Obecność rzeki", "Prąd wody", "Głębokość wody", 
+        "Podłoże skalne", "Trzęsienia ziemi", "Klimat", "Warunki pogodowe", "Wysokość nad poziomem morza",
+        "Roślinność", "Fauna", "Strefy ochronne przyrody", "Ekosystemy wodne", "Skały osadowe",
+        "Jaskinie", "Bagna", "Zalewy", "Tereny zalewowe", "Wiatry"
+    ]
+
+    aspekty_sztuczne = [
+        "Istniejąca infrastruktura drogowa", "Linie kolejowe", "Linie energetyczne", 
+        "Rurociągi", "Budynki i struktury", "Strefy urbanizacyjne", "Tereny przemysłowe",
+        "Strefy rekreacyjne", "Obiekty historyczne", "Granice administracyjne", "Miejsca turystyczne",
+        "Strefy działalności gospodarczej", "Obiekty sportowe", "Szlaki transportowe", "Lotniska",
+        "Porty", "Mosty sąsiadujące", "Tunele", "Parkingi", "Ścieżki rowerowe"
+    ]
+
+    return {
+        "Aspekty naturalne": random.sample(aspekty_naturalne, 5),
+        "Aspekty sztuczne": random.sample(aspekty_sztuczne, 5)
+    }
+
+def wyswietl_aspekty(aspekty):
+    print("Aspekty naturalne do wzięcia pod uwagę:")
+    for aspekt in aspekty["Aspekty naturalne"]:
+        print(f"- {aspekt}")
+
+    print("\nAspekty sztuczne do wzięcia pod uwagę:")
+    for aspekt in aspekty["Aspekty sztuczne"]:
+        print(f"- {aspekt}")
+
+def main():
+    while True:
+        input("Napisz wiadomość, aby wygenerować aspekty (lub wpisz 'exit', aby zakończyć): ")
+        if input().lower() == 'exit':
+            break
+        aspekty = generuj_aspekty()
+        wyswietl_aspekty(aspekty)
+
+# Uruchomienie głównej funkcji programu
+if __name__ == "__main__":
+    main()
+
+#tworzenie mostu z identycznych kart - jak długi może on być?
+def maksymalna_dlugość_mostu(liczba_kart, stosunek_dlugosci):
+    dlugosc_karty = 1  # Przyjmujemy jednostkową długość dla pojedynczej karty
+    maks_dl = 0
+    
+    for n in range(1, liczba_kart + 1):
+        maks_dl += dlugosc_karty / n
+    
+    # Przeliczenie maksymalnej długości na rzeczywistą długość karty
+    maks_dl *= stosunek_dlugosci
+    return maks_dl
+
+# Wprowadź dane
+liczba_kart = int(input("Podaj liczbę kart: "))
+stosunek_dlugosci = float(input("Podaj stosunek długości mostu do długości jednej karty (1 do x): "))
+
+# Obliczanie maksymalnej długości mostu
+dlugosc_mostu = maksymalna_dlugość_mostu(liczba_kart, stosunek_dlugosci)
+
+print(f"Maksymalna długość mostu z {liczba_kart} kart ułożonych w stos to: {dlugosc_mostu:.2f} jednostek długości.")
