@@ -80,7 +80,7 @@ if __name__ == "__main__":
     main()
 
 
-#most łukowy
+#most łukowy - jaką musi mieć minimalną długość?
 import math  # noqa: E402
 
 def minimalna_dlugosc_materialu(m, lambda_, d, N):
@@ -177,3 +177,55 @@ stosunek_dlugosci = float(input("Podaj stosunek długości mostu do długości j
 dlugosc_mostu = maksymalna_dlugość_mostu(liczba_kart, stosunek_dlugosci)
 
 print(f"Maksymalna długość mostu z {liczba_kart} kart ułożonych w stos to: {dlugosc_mostu:.2f} jednostek długości.")
+
+#ostatni krok - budowa własnego mostu - plan
+def przygotowanie_do_budowy():
+    plan = """
+Plan działania na zbudowanie mostu z patyczków - 5 godzin:
+
+1. Przygotowanie (0:00 - 0:30)
+   - Przeanalizuj projekt mostu i jego wymiarów
+   - Przygotuj miejsce pracy (czysta powierzchnia, odpowiednie oświetlenie)
+   - Upewnij się, że masz wszystkie potrzebne materiały i narzędzia
+
+2. Materiały (0:30 - 1:00)
+   - Patyczki do lodów lub drewniane patyczki
+   - Klej (najlepiej klej na gorąco lub klej do drewna)
+   - Nożyczki lub nożyk
+   - Taśma klejąca (opcjonalnie)
+   - Ołówek i linijka
+
+3. Narzędzia (1:00 - 1:30)
+   - Przygotuj narzędzia: klej na gorąco, nożyczki, nożyk, linijkę
+   - Sprawdź, czy klej na gorąco jest gotowy do użycia (rozgrzany)
+   - Upewnij się, że narzędzia są ostre i działają poprawnie
+
+4. Montaż (1:30 - 4:30)
+   - Rozpocznij od budowy fundamentów mostu
+   - Sklejaj patyczki, tworząc stabilne połączenia
+   - Montuj kolejne segmenty mostu, upewniając się, że są one stabilne i równe
+   - Pozwól klejowi wyschnąć odpowiednio między kolejnymi etapami montażu
+   - Regularnie sprawdzaj wymiary i wytrzymałość konstrukcji
+
+5. Wykończenie (4:30 - 5:00)
+   - Sprawdź całą konstrukcję pod kątem stabilności i wytrzymałości
+   - Dokonaj ewentualnych poprawek lub wzmocnień
+   - Pozwól klejowi całkowicie wyschnąć
+   - Posprzątaj miejsce pracy
+
+Powodzenia w budowie mostu z patyczków!
+"""
+    return plan
+
+def main():
+    print("Gratulacje! Pora na budowę własnego mostu. Jesteś gotowy/a?")
+    odpowiedz = input().strip().lower()
+    if odpowiedz in ["tak", "yes", "y", "t", "oczywiście", "gotowy", "gotowa"]:
+        plan = przygotowanie_do_budowy()
+        print(plan)
+    else:
+        print("Gdy będziesz gotowy/a, uruchom program ponownie.")
+
+# Uruchomienie głównej funkcji programu
+if __name__ == "__main__":
+    main()
