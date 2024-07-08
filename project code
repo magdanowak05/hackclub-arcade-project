@@ -1,3 +1,4 @@
+#ENGINEERING PROGRAM - FOR CALCULATING FORCES WHICH OCCUR ON BRIDGES AND HELPING FIND THE DIFFERENT ASPECTS IMPORTANT IN THEIR BUILDING
 #obliczanie rozkładu sił na prętach mostu gdy wjeżdża na niego samochód
 class Most:
     def __init__(self, dlugosc, masa, masa_samochodu, odleglosc_pretow, predkosc_samochodu, max_sila_rozciagajaca):
